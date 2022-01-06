@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" 
+	version="2.0">
+    <jsp:directive.page language="java"
+        contentType="application/xhtml+xml; charset=UTF-8" pageEncoding="UTF-8" />
+    <jsp:output omit-xml-declaration="no" 
+        doctype-root-element="html" 
+        doctype-public="-//W3C//DTD XHTML 1.1//EN" 
+        doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" />
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="refresh" content="7" />
+<title>Parking Entry Logs</title>
+<link rel="stylesheet" href="CSS/parkingLogs.css" type="text/css" />
+</head>
+<body>
+<jsp:include page="AdminEmployeemenu.jspx" />
+
+
+<c:choose>	
+		<c:when test="${EntryObjList.isEmpty()}">
+			<span class="red1">No employees yet!</span>
+		</c:when>
+	<c:otherwise>
+		<table>
+		<c:forEach items="${EntryObjList}" var="obj" varStatus="status">
+			<div>
+     				<c:if test="${status.first}">
+						<span id="firstrow">
+		     				<tr>
+		     					<td>Entry Date</td>
+								<td>Employee Name</td>
+								<td>Employee ID</td>
+								<td>User Name</td>
+							</tr>
+						</span>
+						</c:if>
+					
+					<tr class="rowfont">			
+						<td>${obj.getDateOfEntry()}</td>
+						<td>${obj.getName()}</td>
+						<td>${obj.getEmployeeID()}</td>									
+						<td>${obj.getUserName()}</td>
+	
+					</tr>
+			</div>
+		</c:forEach>
+		</table>
+	</c:otherwise>
+	</c:choose>
+</body>
+</html>
+</jsp:root>

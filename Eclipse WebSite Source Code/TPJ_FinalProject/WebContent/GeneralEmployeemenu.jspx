@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page language="java" />
+<div class="menu">
+	<div class = "userdata">
+		<p>Logged User :- ${EmployeeObj.name}</p>
+		<p>Your Bookings :- ${user_bookings}</p>
+	</div>
+	<div class="mainmenu">
+		<p>
+			<span id="menuitem1"><a href="bookparking.jspx">Book A Parking Spot</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>
+			<span id="menuitem2"><a href="Parkingbookings.jspx">Parking Bookings</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>
+			<span id="menuitem3"><a href="logout.jspx">Log out</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>			
+		</p>
+	</div>
+</div>
+</jsp:root>

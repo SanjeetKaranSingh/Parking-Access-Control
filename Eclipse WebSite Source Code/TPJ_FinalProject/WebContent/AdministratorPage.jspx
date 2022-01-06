@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" 
+	version="2.0">
+    <jsp:directive.page language="java"
+        contentType="application/xhtml+xml; charset=UTF-8" pageEncoding="UTF-8" />
+    <jsp:output omit-xml-declaration="no" 
+        doctype-root-element="html" 
+        doctype-public="-//W3C//DTD XHTML 1.1//EN" 
+        doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Administrative Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="CSS/AdminHome.css" type="text/css" />
+<link rel="icon" type="image/png" sizes="32x32" href="Images/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="Images/favicon-16x16.png" />
+</head>
+<body>
+<jsp:include page="AdminEmployeemenu.jspx" />
+<fieldset>
+ <legend>Parking Settings</legend>
+<form method="post" action="AdministratorPage.jspx">
+<p>
+<c:choose>
+<c:when test="${IsNightModeOnButton}">
+<input type="submit" name="IsNightModeOnButton" value="Turn Off night Mode" class="submitbutton"/>
+</c:when>
+<c:otherwise>
+<input type="submit" name="IsNightModeOnButton" value="Turn On night Mode" class="submitbutton"/>
+</c:otherwise>
+</c:choose>
+<c:choose>
+<c:when test="${IsEmergencyOn}">
+<input type="submit" name="IsEmergencyOn" value="Turn Off Emergency Mode" class="submitbutton"/>
+</c:when>
+<c:otherwise>
+<input type="submit" name="IsEmergencyOn" value="Turn On Emergency Mode" class="submitbutton"/>
+</c:otherwise>
+</c:choose>
+<span class="buttonHover"><a href="AdministratorPage.jspx?shouldResetParkingLimit=true" class = "button">Reset Parking Limit</a></span></p>
+
+</form>
+
+ <iframe title="parkingData" height="60" src="parkingshow.jspx" scrolling="no"/>
+
+<c:if test="${shouldResetParkingLimit}">
+<form method="post" action="AdministratorPage.jspx">
+<label for = "parkingLimitNewInput">New Parking Limit</label>
+<input id = "parkingLimitNewInput" name="parkingLimit" type="text" />
+<input type="submit" name = "submitParkingLimit" value="submitParkingLimit"/> 
+</form>
+</c:if>
+</fieldset>
+
+<fieldset>
+ <legend>Employees Who Can Park</legend>
+ <span class = "buttonHover"><a href="AdministratorPage.jspx?shouldAddNewEmployee=true" class="button">Add New Employee</a></span>
+ <br />
+ <c:choose>	
+		<c:when test="${EmployeeList.isEmpty()}">
+			<span class="red1">No employees yet!</span>
+		</c:when>
+	<c:otherwise>
+		<table>
+		<c:forEach items="${EmployeeList}" var="obj" varStatus="status">
+			<div>
+     			<form action="AdministratorPage.jspx" method="post">
+  
+     				<c:if test="${status.first}">
+						<span id="firstrow">
+		     				<tr>
+								<td>Employee Name</td>
+								<td>Employee ID</td>
+								<td>Fog No</td>
+								<td>Role</td>
+								<td>Delete</td>
+							</tr>
+						</span>
+						</c:if>
+					
+					<tr class="rowfont">			
+						<td>${obj.getname()}</td>
+						<td>${obj.getbigID()}</td>
+						<td><fmt:formatNumber type = "number" value="${obj.getbigFobID()}" /> </td>
+						<td>${obj.GetParkingRole()}</td>
+						<td><input type="submit" name= "cancelbutton" value="Delete" /></td>
+						<input type="hidden" name ="employeeID" value="${obj.getEmployeeID()}" />
+					</tr>
+				</form>
+			</div>
+		</c:forEach>
+		</table>
+	</c:otherwise>
+	</c:choose>
+</fieldset>
+
+<c:if test="${shouldAddNewEmployee}">
+<fieldset>
+<legend>Add New Employee Or Guest</legend>
+<form method="post" action="AdministratorPage.jspx">
+<label for = "Username">User Name :- </label>
+<input id = "Username" name = "Username" type="text" />
+<br />
+<label for = "FogNo">Parking FogNo :- </label>
+<input id = "FogNo" name = "FogNo" type="text" />
+<br />
+<label for = "EmployeeID">Employee ID :- </label>
+<input id = "EmployeeID" name = "EmployeeID" type="text" />
+<br />
+<label for = "Password">Password :- </label>
+<input id = "Password" name = "Password" type="text" />
+<br />
+<label for="Job">Select Job Role:</label>
+<select name="Job" id="Job">
+  <option value="Admin">Admin</option>
+  <option value="General">General</option>
+</select>
+<br />
+<label for = "FirstName">First Name :- </label>
+<input id = "FirstName" name = "FirstName" type="text" />
+<br />
+
+<label for = "LastName">Last Name :- </label>
+<input id = "LastName" name = "LastName" type="text" />
+<br />
+
+<input type="submit" name = "AddEmployee" value="Add Employee"/> 
+</form>
+</fieldset>
+</c:if>
+
+</body>
+</html>
+</jsp:root>

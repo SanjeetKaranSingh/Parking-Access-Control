@@ -1,0 +1,12 @@
+body{
+	background-color: rgb(230,255,238);
+	color: rgb(0,128,43);
+	font-family: "Times New Roman", serif; 
+}
+h1{
+	color: rgb(0,128,43);
+}
+
+#invalidFont{
+	color: red;
+}
