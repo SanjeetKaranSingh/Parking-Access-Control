@@ -6,3 +6,4 @@
 •	J2EE <a href="https://github.com/SanjeetKaranSingh/Parking-Access-Control/tree/main/Eclipse%20WebSite%20Source%20Code/TPJ_FinalProject">webpage</a> provide Administrator settings to set parking limit, view parking entry logs as well as turning on night lights and Emergency mode.<br />
 •	Website is using jspx pages and servlets and filters to process backend, talking with DB through JDBC.<br />
 •	Website is taking to raspberry pi through <a href="https://github.com/SanjeetKaranSingh/Parking-Access-Control/tree/main/Rest%20API%20code%20that%20was%20in%20public_html">Rest API</a>, that is written in python and configured on apache2 server.<br />
+Other Contributor: Arshdeep Singh Cheema
